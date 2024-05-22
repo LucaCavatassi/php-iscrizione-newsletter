@@ -1,9 +1,21 @@
 <?php 
 require_once __DIR__ . "/partials/functions.php";
+
+// SE L'ARRAY ASSOCIATIVO SESSION NON ESISTE E QUINDI LA SESSIONE NON é INIZIATA, INIZIALA!
+if (!isset($_SESSION)){
+    session_start();
+};
+
+
+var_dump($_SESSION);
+
+if (isset($valid) && $valid === true) {
+    header("Location: ./thank_you.php");
+};
+
+
+
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,23 +32,25 @@ require_once __DIR__ . "/partials/functions.php";
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Iscriviti alla Newsletter!</h1>
-                <form action="index.php" method="GET">
+                <h1 class="py-3">Iscriviti alla Newsletter!</h1>
+                <form action="index.php" method="POST">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input name="user_email" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        <div id="emailHelp" class="form-text">Non condivideremo mai la mail con nessuno.</div>
                     </div>
                     
-                    <div class="mb-3">
+                    <div class="py-3 mb-3">
                         <?php if (isset($valid) && $valid === true) {?>
-                            <?php echo "<span class='alert alert-success'>Email valida!</span>" ?>
-                        <?php } else {?>
+                            <?php echo "<span class='alert alert-success'>Email valida!</span>"; ?>
+                        <?php } else if ((isset($valid) && $valid === false)){?>
                             <?php echo "<span class='alert alert-danger'>Email  non valida!</span>" ?>
-                        <?php }?>
+                        <?php } else {?>
+                            <?php echo "<span class='alert alert-secondary'>Inserisci la tua mail qui sopra!</span>" ?>
+                        <?php }?>    
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Iscriviti</button>
                 </form>
             </div>
         </div>
