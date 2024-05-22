@@ -7,12 +7,10 @@ if (!isset($_SESSION)){
 };
 
 
-var_dump($_SESSION);
 
 if (isset($valid) && $valid === true) {
     header("Location: ./thank_you.php");
 };
-
 
 
 ?>
@@ -41,13 +39,13 @@ if (isset($valid) && $valid === true) {
                     </div>
                     
                     <div class="py-3 mb-3">
-                        <?php if (isset($valid) && $valid === true) {?>
+                        <?php if ($valid === true) {?>
                             <?php echo "<span class='alert alert-success'>Email valida!</span>"; ?>
-                        <?php } else if ((isset($valid) && $valid === false)){?>
-                            <?php echo "<span class='alert alert-danger'>Email  non valida!</span>" ?>
-                        <?php } else {?>
+                        <?php } else if ($valid === false){?>
+                            <?php echo "<span class='alert alert-danger'>L'email <strong><i>{$user_email}</i></strong> non è valida!</span>" ?>
+                        <?php } else if ($valid === null) {?>
                             <?php echo "<span class='alert alert-secondary'>Inserisci la tua mail qui sopra!</span>" ?>
-                        <?php }?>    
+                        <?php }?>   
                     </div>
 
                     <button type="submit" class="btn btn-primary">Iscriviti</button>
